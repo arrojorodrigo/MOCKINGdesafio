@@ -1,9 +1,6 @@
-# DESAFIO MOCKING Y PRUEBA DE ERRORES
-Importacion facker en utils.js
-Mocker router app.js // router.mocker
-send error product.error // middlewares
-carpeta errores // productos, enumeracion y custom
-send error controllers
+# DESAFIO CLASE 34 LOGGER
+IMPLEMENTACION LOGGER
+>npm install winston
 # Backend coderhouse
 
 -Run server
