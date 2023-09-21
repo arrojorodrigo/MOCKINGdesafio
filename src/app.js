@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 import MongoStore from 'connect-mongo';
 import session from 'express-session';
 import keys from './config/config.env.js';
@@ -8,6 +8,7 @@ import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import { Server } from 'socket.io';
 import handlebars from 'express-handlebars'
+import { addLogger } from './config/winston/logger.winston.js';
 import __dirname from './utils.js';
 
 import productsRouter from './routes/router.products.js'
@@ -16,6 +17,7 @@ import viewRouter from './routes/router.views.js'
 import authRouter from './routes/router.auth.js'
 import chatRouter from './routes/router.chat.js'
 import mocksRouter from './routes/router.mock.js'
+import logsRouter from './routes/router.log.js'
 
 const app = express();
 
@@ -41,9 +43,10 @@ app.use(session({
   saveUninitialized: false
 }))
 app.use(cookieParser('Farah'));
+app.use(addLogger);
 
 // SERVER
-const httpServer = app.listen(keys.PORT, console.log('seven up'))
+const httpServer = app.listen(keys.PORT, console.log('Server arriba'))
 export const socketServer = new Server(httpServer);
 
 // HANDLEBARS
@@ -53,6 +56,7 @@ app.set('views', `${__dirname}/views`)
 app.set('view engine', 'handlebars');
 
 // ROUTERS
+app.use('/loggertest', logsRouter)
 app.use('/mockingproducts', mocksRouter)
 app.use('/', viewRouter)
 app.use('/api/products/', productsRouter);

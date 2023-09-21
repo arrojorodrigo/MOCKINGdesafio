@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 
+// ADD VARIABLES
 config()
 
 export default {
